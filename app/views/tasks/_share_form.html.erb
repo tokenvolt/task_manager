@@ -1,0 +1,9 @@
+<%= form_tag share_task_path(@task.id) do %>
+  <div>
+    <%= label_tag :email %>
+    <%= text_field_tag :email, params[:email] %>
+  </div>
+  <div>
+  	<%= submit_tag "Share"%>
+  </div>
+<% end %>
