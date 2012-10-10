@@ -1,0 +1,25 @@
+var shareForm = {
+	container: $('<%=j render "share_form" %>'),
+
+	config: {
+		effect: 'fadeToggle',
+		speed: 500
+	},
+
+	init: function() {
+		shareForm.container[shareForm.config.effect](shareForm.config.speed).insertAfter($('#<%=j dom_id(@task) %>'));
+		shareForm.close.call(shareForm.container);
+	},
+
+	close: function() {
+		var $this = $(this);
+		$('<span class="close">x</span>')
+       .prependTo(this)
+       .on('click', function() {
+       	  $this[shareForm.config.effect](shareForm.config.speed);
+       })
+	}
+};
+
+shareForm.init();
+

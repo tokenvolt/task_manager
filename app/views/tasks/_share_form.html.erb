@@ -1,4 +1,5 @@
-<%= form_tag share_task_path(@task.id) do %>
+<div id="share_form">
+<%= form_tag share_task_path(@task.id), :remote => true do %>
   <div>
     <%= label_tag :email %>
     <%= text_field_tag :email, params[:email] %>
@@ -7,3 +8,4 @@
   	<%= submit_tag "Share"%>
   </div>
 <% end %>
+</div>

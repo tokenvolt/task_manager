@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "TaskManager" %></title>
+        <!-- Javascripts
+    ================================================== -->
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "http://localhost:9292/faye.js" %>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -54,7 +58,8 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <% if user_signed_in? %>
-                <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>             
+                <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+                <li><%= link_to "#{current_user.email}", edit_user_registration_path %></li>      
               <% else %>
                 <li><%= link_to "Sign Up", new_user_registration_path %></li>
                 <li><%= link_to "Sign In", new_user_session_path %></li>
@@ -87,11 +92,5 @@
       </footer>
 
     </div> <!-- /container -->
-
-    <!-- Javascripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
-
   </body>
 </html>

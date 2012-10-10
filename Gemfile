@@ -50,5 +50,7 @@ gem 'jquery-rails'
 gem 'bootstrap-will_paginate'
 gem 'simple_form'
 gem 'devise'
+gem 'faye'
+gem 'thin'
 
 gem 'hirb', :group => :development

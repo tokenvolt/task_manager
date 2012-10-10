@@ -30,7 +30,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @task }
+      format.json { render json: @task }      
     end
   end
 
@@ -90,6 +90,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html # preshare.html.erb
       format.json { render json: @task }
+      format.js { @task }
     end
   end
 
@@ -100,12 +101,15 @@ class TasksController < ApplicationController
     if @user.nil?  
       redirect_to tasks_url, :flash => { error: "User was not found in the system" }
     else
-      @task.users << @user  
+      @task.users << @user
+
+      @task.update_attributes(params[:task])
 
       respond_to do |format|
         if @task.update_attributes(params[:task])
           format.html { redirect_to tasks_url, notice: 'Task was successfully shared.' }
           format.json { head :no_content }
+          format.js
         else
           format.html { render action: "preshare" }
           format.json { render json: @task.errors, status: :unprocessable_entity }
