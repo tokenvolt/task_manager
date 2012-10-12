@@ -26,7 +26,15 @@ ActiveRecord::Schema.define(:version => 20121010073808) do
     t.datetime "updated_at", :null => false
   end
 
-# Could not dump table "users" because of following StandardError
-#   Unknown type 'stirng' for column 'username'
+  create_table "users", :force => true do |t|
+    t.string   "email",               :default => "", :null => false
+    t.string   "encrypted_password",  :default => "", :null => false
+    t.datetime "remember_created_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.string   "username"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

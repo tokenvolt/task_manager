@@ -98,7 +98,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])   
     @user = User.find_by_email(params[:email])
 
-    if @user.nil?  
+    if @user.nil? || @task.users.include?(@user)
       redirect_to tasks_url, :flash => { error: "User was not found in the system" }
     else
       @task.users << @user
