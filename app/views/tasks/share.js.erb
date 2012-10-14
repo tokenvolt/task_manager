@@ -1,6 +1,6 @@
 <% broadcast "/messages/#{@user.username}" do %>
   $('.table tr:first-child')
-    .before('<%=j render "task", :task => @task %>');
+    .before('<%=j render "task", :task => @task, :current_user => @user %>');
 
 <% end %>
 $('#share_form').hide();

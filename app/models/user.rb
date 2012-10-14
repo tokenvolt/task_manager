@@ -10,4 +10,12 @@ class User < ActiveRecord::Base
 
   has_many :user_tasks, :dependent => :destroy
   has_many :tasks, :through => :user_tasks, :uniq => true
+
+  def share(task, with_whom_shared)
+  	sharing = UserTask.new
+  	sharing.user_id = with_whom_shared.id
+  	sharing.task_id = task.id
+  	sharing.user_who_shared_id = self.id
+  	sharing.save
+  end
 end

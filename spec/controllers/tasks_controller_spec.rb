@@ -26,7 +26,14 @@ describe TasksController do
       get :new, {}
       assigns(:task).should be_a_new(Task)
     end
-  end  
+  end
+
+  describe "POST create" do
+    it "should create a new task and save it to the database" do
+      Task.any_instance.should_receive(:save)
+      post :create, { :id => @task.to_param }
+    end
+  end    
 
   describe "GET show" do
     it "should assign the requested task to @task" do          
@@ -93,5 +100,7 @@ describe TasksController do
         response.should render_template("edit")
       end
     end
+
+
   end
 end

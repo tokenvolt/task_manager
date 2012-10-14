@@ -1,5 +1,10 @@
 <%= content_tag :tr, task, :id => "task_#{task.id}" do %>
   <td><%= task.title %></td>
+  <% if task.shared_with(current_user).blank? %>
+    <td></td>
+  <% else %>
+    <td><%= task.shared_with(current_user).first.email %></td>
+  <% end %>
   <td><%= task.created_at.strftime("%d %b, %H:%M") %></td>
   <td>
     <%= link_to t('.preshare', :default => t("helpers.links.share")),

@@ -101,19 +101,12 @@ class TasksController < ApplicationController
     if @user.nil? || @task.users.include?(@user)
       redirect_to tasks_url, :flash => { error: "User was not found in the system" }
     else
-      @task.users << @user
-
-      @task.update_attributes(params[:task])
+      current_user.share(@task, @user)
 
       respond_to do |format|
-        if @task.update_attributes(params[:task])
-          format.html { redirect_to tasks_url, notice: 'Task was successfully shared.' }
-          format.json { head :no_content }
-          format.js
-        else
-          format.html { render action: "preshare" }
-          format.json { render json: @task.errors, status: :unprocessable_entity }
-        end
+        format.html { redirect_to tasks_url, notice: 'Task was successfully shared.' }
+        format.json { head :no_content }
+        format.js
       end
     end
   end
